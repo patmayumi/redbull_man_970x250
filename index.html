@@ -161,8 +161,9 @@
         tlMain
             .set('#canvas',{autoAlpha: 1});
      
-
-        tl = new TimelineMax();
+		var masterTimeline = new TimelineMax({paused:true}),
+		tl = new TimelineMax();
+		
         tl
             //STEP 1
             .from(".txt1_1",  0.3, {autoAlpha: 0, x:450, ease:Power3.easeOut})
@@ -234,6 +235,13 @@
             .fromTo('.speaker2', 0.6, {scale: 1}, {scale:0.8, y: 8, transformOrigin:"top center", ease:Back.easeOut.config(1.3), repeat: -1, yoyo: true}, 0.2)
             .fromTo('.lines1', 0.6, {scale: 1}, {scale:0.8, y: 5, transformOrigin:"top center", ease:Back.easeOut.config(1), repeat: -1, yoyo: true}, 0.1)
             .fromTo('.lines2', 0.6, {scale: 1}, {scale:0.8, y: 2, transformOrigin:"top center", ease:Back.easeOut.config(1.8), repeat: -1, yoyo: true}, 0)
+
+        masterTimeline.add([tl]);
+
+		window.onload = function()
+		{
+		    masterTimeline.play();
+		}
 
     </script>
 </body>
